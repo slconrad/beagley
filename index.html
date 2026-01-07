@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beagley's Painting - Professional Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            /* Blue Gradient Palette */
+            --primary-blue: #0388d5;
+            --dark-blue: #01579B;
+            --light-blue: #E1F5FE;
+            --gradient-main: linear-gradient(135deg, #0277BD 0%, #4FC3F7 100%);
+            --gradient-dark: linear-gradient(135deg, #01579B 0%, #0277BD 100%);
+            
+            --dark-charcoal: #263238;
+            --text-color: #455A64;
+            --white: #ffffff;
+            --light-gray: #f5f7fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif; /* Changed to Sans-Serif */
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: var(--white);
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--dark-charcoal);
+            font-weight: 700;
+        }
+
+        a { text-decoration: none; transition: 0.3s; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- UTILITIES --- */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 4px; /* Slight radius for modern feel */
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background: var(--gradient-main);
+            color: var(--white);
+            border: none;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(2, 119, 189, 0.3);
+        }
+
+        .btn-dark {
+            background-color: var(--dark-charcoal);
+            color: var(--white);
+            border: 2px solid var(--dark-charcoal);
+        }
+        .btn-dark:hover { 
+            background-color: transparent; 
+            color: var(--dark-charcoal); 
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+            background: transparent;
+            padding: 10px 25px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-main);
+            border-radius: 2px;
+        }
+
+        /* --- HEADER --- */
+        .top-bar {
+            background: var(--dark-blue);
+            color: rgba(255,255,255,0.9);
+            padding: 12px 0;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .top-bar .container {
+            display: flex;
+            justify-content: flex-end;
+            gap: 25px;
+        }
+        .top-bar i { margin-right: 8px; color: #4FC3F7; }
+
+        header {
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .logo {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--dark-charcoal);
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo i { color: var(--primary-blue); }
+        .logo span { color: var(--primary-blue); }
+
+        nav ul { display: flex; gap: 35px; }
+        nav a { 
+            color: var(--text-color); 
+            font-weight: 500; 
+            font-size: 0.95rem; 
+            text-transform: uppercase;
+            position: relative;
+        }
+        nav a:hover { color: var(--primary-blue); }
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-blue);
+            transition: width 0.3s;
+        }
+        nav a:hover::after { width: 100%; }
+
+        /* --- HERO --- */
+        .hero {
+            position: relative;
+            height: 85vh;
+            min-height: 600px;
+            /* Updated Image: Clean Blue Room */
+            
+            background: url('https://images.unsplash.com/photo-1525909002-1b05e0c869d8?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+        }
+        /* Blue Gradient Overlay */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top:0; left:0; right:0; bottom:0;
+            background: linear-gradient(90deg, rgba(1, 87, 155, 0.85) 0%, rgba(2, 119, 189, 0.4) 100%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            margin-left: 5%;
+            color: white;
+        }
+        .hero h2 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+            color: #E1F5FE;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            color: white;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 35px;
+            opacity: 0.9;
+        }
+        .hero-buttons { display: flex; gap: 20px; }
+
+        /* --- CTA STRIP --- */
+        .cta-strip {
+            background: var(--gradient-main);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .cta-strip h3 { color: white; margin-bottom: 10px; font-size: 1.8rem; font-weight: 700; }
+        .cta-strip .btn-white {
+            background: white;
+            color: var(--primary-blue);
+            margin-left: 20px;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .cta-strip .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        /* --- HOW IT WORKS --- */
+        .how-it-works { padding: 100px 0; text-align: center; background-color: var(--white); }
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-top: 60px;
+        }
+        .step-card {
+            padding: 30px;
+            transition: transform 0.3s;
+            background: var(--light-gray);
+            border-radius: 10px;
+        }
+        .step-card:hover { transform: translateY(-10px); }
+        .icon-circle {
+            width: 90px;
+            height: 90px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: var(--primary-blue);
+            font-size: 2.2rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        .step-card h4 { margin-bottom: 15px; font-size: 1.2rem; }
+
+        /* --- SHOWCASE GRID --- */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            height: 350px;
+        }
+        .showcase-item {
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        .showcase-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .showcase-item:hover img { transform: scale(1.1); }
+
+        /* --- ZIG ZAG SECTION (Approach & Story) --- */
+        .zig-zag-section { padding: 100px 0; }
+        .zig-zag-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 100px;
+            gap: 60px;
+        }
+        .zig-zag-row:nth-child(even) { flex-direction: row-reverse; }
+        
+        .zz-content { flex: 1; }
+        .zz-content h3 { 
+            font-size: 2.2rem; 
+            margin-bottom: 20px; 
+            color: var(--primary-blue);
+        }
+        .zz-content p { color: #555; margin-bottom: 25px; font-size: 1.05rem; }
+        
+        .zz-image { flex: 1; position: relative; }
+        .zz-image img { 
+            width: 100%; 
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15); 
+        }
+
+        /* --- SERVICES (Blue Gradient Background) --- */
+        .services-section {
+            /* Changed from wood texture to Blue Gradient */
+            background: var(--gradient-dark);
+            padding: 100px 0;
+            position: relative;
+            color: white;
+            overflow: hidden;
+        }
+        /* Pattern Overlay */
+        .services-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.5;
+        }
+
+        .services-container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        .services-container .section-title { color: white; }
+        .services-container .section-title::after { background-color: white; }
+
+        .services-layout {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 60px;
+            margin-top: 60px;
+        }
+        
+        .center-brush {
+            width: 260px;
+            height: 260px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 50px rgba(0,0,0,0.2);
+            z-index: 5;
+            position: relative;
+        }
+        /* Central Icon instead of image for cleaner vector look */
+        .center-brush i { font-size: 100px; color: white; }
+
+        .service-bubble {
+            width: 200px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .service-bubble:hover { transform: translateY(-5px); }
+        .sb-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid rgba(255,255,255,0.2);
+            overflow: hidden;
+            margin: 0 auto 20px;
+            background: white;
+        }
+        .sb-img img { width: 100%; height: 100%; object-fit: cover; }
+        .service-bubble h4 { color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; }
+        .service-bubble p { color: rgba(255,255,255,0.8); font-size: 0.9rem; }
+
+        /* --- BLOG --- */
+        .blog-section { padding: 100px 0; background: var(--light-gray); }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        .blog-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        .blog-card:hover { transform: translateY(-5px); }
+        .blog-img { height: 220px; overflow: hidden; }
+        .blog-img img { width: 100%; height: 100%; object-fit: cover; }
+        .blog-content { padding: 25px; }
+        .blog-content h4 { font-size: 1.3rem; margin-bottom: 10px; color: var(--dark-charcoal); }
+        .blog-content p { font-size: 0.95rem; color: #666; margin-bottom: 20px; }
+        .blog-content .read-more {
+            color: var(--primary-blue);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        /* --- FAQ --- */
+        .faq-section {
+            /* Generic Painter tools image */
+            background: url('https://images.unsplash.com/photo-1599619351208-3e6c839d6828?q=80&w=2072&auto=format&fit=crop') fixed center;
+            padding: 100px 0;
+            position: relative;
+        }
+        .faq-section::before {
+            content: '';
+            position: absolute; top:0; left:0; right:0; bottom:0;
+            background: rgba(38, 50, 56, 0.85); /* Dark charcoal overlay */
+        }
+        .faq-container { position: relative; z-index: 2; color: white; text-align: center; }
+        .faq-container .section-title { color: white; }
+        .faq-container .section-title::after { background: var(--primary-blue); } 
+        
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            text-align: left;
+            margin-top: 50px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .faq-item h4 { color: #4FC3F7; margin-bottom: 10px; font-size: 1.2rem; }
+        .faq-item p { color: #ccc; }
+
+        /* --- TESTIMONIALS --- */
+        .testimonials { padding: 100px 0; }
+        .testi-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .testi-card {
+            background: white;
+            border: 1px solid #eee;
+            padding: 40px;
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .testi-avatar {
+            width: 70px;
+            height: 70px;
+            background: #e0e0e0;
+            border-radius: 50%;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .testi-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .testi-content p { font-style: italic; font-size: 1rem; margin-bottom: 15px; color: #555; }
+        .testi-content h5 { color: var(--primary-blue); font-size: 0.95rem; font-weight: 700; text-transform: uppercase; }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--dark-charcoal);
+            color: #b0bec5;
+            padding: 60px 0 20px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        .footer-col h4 { color: white; margin-bottom: 25px; font-size: 1.1rem; letter-spacing: 1px; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col a { color: #b0bec5; }
+        .footer-col a:hover { color: var(--primary-blue); }
+        
+        /* Map Container */
+        .map-section {
+            width: 100%;
+            height: 400px;
+            background: #ddd;
+            margin-bottom: -60px; /* Pull footer up visually */
+            position: relative;
+            z-index: 10;
+        }
+        
+        .copyright {
+            border-top: 1px solid #37474f;
+            text-align: center;
+            padding-top: 25px;
+            font-size: 0.85rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; gap: 20px; }
+            .hero { text-align: center; justify-content: center; }
+            .hero-content { margin-left: 0; }
+            .hero-buttons { justify-content: center; }
+            .hero h1 { font-size: 2.8rem; }
+            .showcase-grid { grid-template-columns: 1fr; height: auto; }
+            .zig-zag-row { flex-direction: column !important; text-align: center; gap: 40px; }
+            .faq-grid { grid-template-columns: 1fr; }
+            .testi-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Animation Classes */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="container">
+            <span><i class="fas fa-phone-alt"></i> (903) 555-0199</span>
+            <span><i class="fas fa-envelope"></i> contact@beagleyspainting.com</span>
+            <span><i class="fas fa-map-marker-alt"></i> Tyler, TX</span>
+        </div>
+    </div>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-paint-roller"></i>
+                Beagley's<span>Painting</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container hero-content fade-in">
+            <h2>Premium Finishes in Tyler, TX</h2>
+            <h1>Transform Your<br>Space Today.</h1>
+            <p>Trust Beagley's Painting for meticulous craftsmanship, vibrant colors, and service that treats your home like our own.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
+                <a href="#portfolio" class="btn btn-outline" style="color: white; border-color: white;">Our Portfolio</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="cta-strip">
+        <div class="container">
+            <h3>Ready to refresh your home or business?</h3>
+            <p>We provide free color consultations and detailed estimates.</p>
+            <br>
+            <a href="#contact" class="btn btn-white">GET STARTED</a>
+        </div>
+    </div>
+
+    <section class="how-it-works container">
+        <h2 class="section-title fade-in">Our Process</h2>
+        <div class="steps-grid">
+            <div class="step-card fade-in">
+                <div class="icon-circle"><i class="fas fa-file-invoice-dollar"></i></div>
+                <h4>1. Free Estimate</h4>
+                <p>We visit your property in Tyler to provide a transparent, detailed quote with no hidden fees.</p>
+            </div>
+            <div class="step-card fade-in">
+                <div class="icon-circle"><i class="fas fa-calendar-check"></i></div>
+                <h4>2. Schedule</h4>
+                <p>We work around your schedule. Our team arrives on time, fully prepped to start the transformation.</p>
+            </div>
+            <div class="step-card fade-in">
+                <div class="icon-circle"><i class="fas fa-check-circle"></i></div>
+                <h4>3. Final Walkthrough</h4>
+                <p>We perform a rigorous quality check and don't sign off until you are 100% satisfied.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="showcase-grid" id="portfolio">
+        <div class="showcase-item">
+            <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=2070&auto=format&fit=crop" alt="House Exterior">
+        </div>
+        <div class="showcase-item">
+            <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1974&auto=format&fit=crop" alt="Interior Living Room">
+        </div>
+        <div class="showcase-item">
+            <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=2070&auto=format&fit=crop" alt="Kitchen Cabinets">
+        </div>
+    </section>
+
+    <section id="about" class="container zig-zag-section">
+        
+        <div class="zig-zag-row fade-in">
+            <div class="zz-content">
+                <h3 style="border-left: 4px solid var(--primary-blue); padding-left: 20px;">The Beagley Difference</h3>
+                <p>Painting is more than just applying color—it's about protection and precision. We use premium paints that withstand the Texas heat and humidity. Our prep work is extensive, ensuring your finish lasts for years.</p>
+                <a href="#" class="btn btn-outline">LEARN MORE</a>
+            </div>
+            <div class="zz-image">
+                <img src="https://images.unsplash.com/photo-1585676737728-432f58d5fdba?q=80&w=2070&auto=format&fit=crop" alt="Painter working">
+            </div>
+        </div>
+
+        <div class="zig-zag-row fade-in">
+            <div class="zz-content">
+                <h3 style="border-left: 4px solid var(--primary-blue); padding-left: 20px;">Serving East Texas</h3>
+                <p>Beagley's Painting has been a staple in the Tyler community for over a decade. We are family-owned, locally operated, and dedicated to beautifying our neighbors' homes one brushstroke at a time.</p>
+                <a href="#" class="btn btn-outline">READ OUR STORY</a>
+            </div>
+            <div class="zz-image">
+                <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=2070&auto=format&fit=crop" alt="Texas Home">
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services-section">
+        <div class="container services-container">
+            <h2 class="section-title">Our Services</h2>
+            
+            <div class="services-layout fade-in">
+                <div class="service-bubble">
+                    <div class="sb-img"><img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=1974&auto=format&fit=crop" alt="Interior"></div>
+                    <h4>Interior</h4>
+                    <p>Walls, ceilings, trim & cabinets.</p>
+                </div>
+
+                <div class="service-bubble">
+                    <div class="sb-img"><img src="https://images.unsplash.com/photo-1604014237800-1c9102c219da?q=80&w=2070&auto=format&fit=crop" alt="Exterior"></div>
+                    <h4>Exterior</h4>
+                    <p>Siding, brick, fences & decks.</p>
+                </div>
+
+                <div class="service-bubble">
+                    <div class="sb-img"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2031&auto=format&fit=crop" alt="Repairs"></div>
+                    <h4>Commercial</h4>
+                    <p>Offices, retail & industrial.</p>
+                </div>
+
+                <div class="service-bubble">
+                    <div class="sb-img"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2070&auto=format&fit=crop" alt="Pressure Washing"></div>
+                    <h4>Prep Work</h4>
+                    <p>Drywall repair & pressure washing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="blog" class="blog-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Painting Tips</h2>
+            <div class="blog-grid">
+                <article class="blog-card fade-in">
+                    <div class="blog-img"><img src="https://images.unsplash.com/photo-1520032525096-7bd04a94b5a4?q=80&w=2076&auto=format&fit=crop" alt="Blue Wall"></div>
+                    <div class="blog-content">
+                        <h4>Choosing the Perfect Color</h4>
+                        <p>, Find out which scolor promotes relaxation in your living space.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                <article class="blog-card fade-in">
+                    <div class="blog-img"><img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?q=80&w=1974&auto=format&fit=crop" alt="Paint Swatches"></div>
+                    <div class="blog-content">
+                        <h4>Satin vs. Semi-Gloss</h4>
+                        <p>Understanding sheen levels is crucial for durability and aesthetics. Here is our guide.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container faq-container fade-in">
+            <h2 class="section-title">Common Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>Do you provide a warranty?</h4>
+                    <p>Yes, we offer a 2-year warranty on workmanship for all exterior and interior painting projects.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Do I need to buy the paint?</h4>
+                    <p>No, we handle all material procurement. We pass our contractor discounts on premium paints directly to you.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>How long does a project take?</h4>
+                    <p>An average bedroom takes 1 day, while a full exterior can take 3-5 days depending on the size and weather.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Are you insured?</h4>
+                    <p>Beagley's Painting is fully licensed and carries liability insurance for your peace of mind.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials container fade-in">
+        <h2 class="section-title">Happy Neighbors</h2>
+        <div class="testi-grid">
+            <div class="testi-card">
+                <div class="testi-avatar">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop" alt="Client">
+                </div>
+                <div class="testi-content">
+                    <p>"Beagley's Painting did an incredible job on our kitchen cabinets. They look factory-finish new! The team was polite and clean."</p>
+                    <h5>- Mark T., Tyler TX</h5>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div class="testi-avatar">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop" alt="Client">
+                </div>
+                <div class="testi-content">
+                    <p>"We hired them for our office building. Efficient, affordable, and the new color scheme really modernized our business."</p>
+                    <h5>- Linda K., Whitehouse TX</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="map-section">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107194.39807221375!2d-95.301275!3d32.351260!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8649c7b953493e87%3A0x74603092524458d9!2sTyler%2C%20TX!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>About Beagley's</h4>
+                    <p>Professional painting services for Tyler, Texas and surrounding areas. Committed to quality, integrity, and customer satisfaction.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#portfolio">Our Work</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>123 Painting Lane</li>
+                        <li>Tyler, TX 75701</li>
+                        <li>(903) 555-0199</li>
+                        <li>contact@beagleyspainting.com</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div style="font-size: 1.5rem; display: flex; gap: 15px;">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2024 Beagley's Painting. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const faders = document.querySelectorAll('.fade-in');
+            
+            const appearOptions = {
+                threshold: 0.2,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add('visible');
+                        appearOnScroll.unobserve(entry.target);
+                    }
+                });
+            }, appearOptions);
+
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+        });
+    </script>
+</body>
+</html>
